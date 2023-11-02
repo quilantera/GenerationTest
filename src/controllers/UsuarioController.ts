@@ -38,7 +38,7 @@ class UsuarioController {
             if (usuarios) {
                 response.status(200).json(usuarios);
             } else {
-                response.status(400).json({success: false,message: "Erro ao encontrar usuários"});
+                response.status(404).json({success: false,message: "Erro ao encontrar usuários"});
             }
         } catch (error) {
             response.status(500).json({ success: false, message: "Erro no servidor" });

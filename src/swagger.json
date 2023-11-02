@@ -1,0 +1,198 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "version": "1.0.0",
+      "title": "API Generation Teste",
+      "description": "API para processo seletivo da Generation",
+      "contact": {
+        "email": "gugaquilante@gmail.com"
+      }
+    },
+    "basePath": "/api",
+    "schemes": ["http"],
+    "paths": {
+      "/usuarios": {
+        "get": {
+          "summary": "Listar Todos Usuários",
+          "description": "Retorna uma lista de usuários",
+          "produces": ["application/json"],
+          "responses": {
+            "200": {
+              "description": "Retorno com sucesso",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/Usuario"
+                }
+              }
+            }
+            
+          }
+        },
+        "post": {
+          "summary": "Criar Usuário",
+          "description": "Cria um novo usuário",
+          "produces": ["application/json"],
+          "parameters": [
+            {
+              "in": "body",
+              "name": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/UsuarioInput"
+              }
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "Usuário criado com sucesso",
+              "schema": {
+                "$ref": "#/definitions/Usuario"
+              }
+            }
+          }
+        }
+      },
+      "/usuarios/{id}": {
+        "get": {
+          "summary": "Obter Usuário por ID",
+          "description": "Retorna um usuário pelo ID",
+          "produces": ["application/json"],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Usuário retornado com sucesso",
+              "schema": {
+                "$ref": "#/definitions/Usuario"
+              }
+            },
+            "404": {
+              "description": "Usuário não encontrado"
+            }
+          }
+        },
+        "put": {
+          "summary": "Atualizar Usuário por ID",
+          "description": "Atualiza um usuário pelo ID",
+          "produces": ["application/json"],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "in": "body",
+              "name": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/UsuarioInput"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Usuário atualizado com sucesso",
+              "schema": {
+                "$ref": "#/definitions/Usuario"
+              }
+            },
+            "400": {
+              "description": "Erro ao atualizar usuário"
+            },
+            "500":{
+                "description": "Erro interno do servidor"
+            }
+          }
+        },
+        "delete": {
+          "summary": "Excluir Usuário por ID",
+          "description": "Exclui um usuário pelo ID",
+          "produces": ["application/json"],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Usuário excluído com sucesso"
+            },
+            "500": {
+              "description": "Erro interno"
+            }
+          }
+        }
+      }
+    },
+    "definitions": {
+      "Usuario": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "nome": {
+            "type": "string"
+          },
+          "idade": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nota_primeiro_semestre": {
+            "type": "number",
+            "format": "float"
+          },
+          "nota_segundo_semestre": {
+            "type": "number",
+            "format": "float"
+          },
+          "nome_professor": {
+            "type": "string"
+          },
+          "numero_da_sala": {
+            "type": "string"
+          }
+        }
+      },
+      "UsuarioInput": {
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string"
+          },
+          "idade": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nota_primeiro_semestre": {
+            "type": "number",
+            "format": "float"
+          },
+          "nota_segundo_semestre": {
+            "type": "number",
+            "format": "float"
+          },
+          "nome_professor": {
+            "type": "string"
+          },
+          "numero_da_sala": {
+            "type": "string"
+          }
+        },
+        "required": ["nome", "idade", "nota_primeiro_semestre", "nota_segundo_semestre", "nome_professor", "numero_da_sala"]
+      }
+    }
+  }
+  
